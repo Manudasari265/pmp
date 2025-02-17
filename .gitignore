@@ -38,5 +38,5 @@ yarn-error.log*
 *.pem
 
 # DB volume
-db-data/
+/db-data/
 /data/db
