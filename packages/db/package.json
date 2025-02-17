@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "db:generate": "yarn drizzle-kit generate"
+    "db:generate": "pnpm drizzle-kit generate",
+    "db:migrate": "pnpm drizzle-kit migrate"
   },
   "keywords": [],
   "author": "",
@@ -14,11 +15,12 @@
   "dependencies": {
     "dotenv": "^16.4.7",
     "drizzle-orm": "^0.39.3",
-    "postgres": "^3.4.5"
+    "pg": "^8.13.3"
   },
   "devDependencies": {
     "@types/dotenv": "6.1.1",
     "@types/node": "^22.13.4",
+    "@types/pg": "^8.11.11",
     "drizzle-kit": "^0.30.4",
     "typescript": "^5.7.3"
   }
