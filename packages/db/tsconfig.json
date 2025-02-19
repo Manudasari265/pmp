@@ -1,5 +1,4 @@
 {
-    "$schema": "https://json.schemastore.org/tsconfig",
     "extends": "@repo/typescript-config/base.json",
     "compilerOptions": {
         "isolatedModules": false,
@@ -7,8 +6,10 @@
         "baseUrl": ".",
         "paths": {
             "@*": ["./*"]
-        }
+        },
+        "rootDir": "./src",
+        "outDir": "./dist"
     },
     "include": ["src/**/*.ts"],
-    "exclude": ["node_modules"]
+    "exclude": ["node_modules", "dist", "src/**/**.js", ".generated"]
 }
