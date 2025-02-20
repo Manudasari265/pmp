@@ -5,7 +5,7 @@ import {
     varchar 
 } from "drizzle-orm/pg-core";
 
-export const user = pgTable("user", {
+export const userTable = pgTable("user", {
     id: uuid("id").primaryKey().defaultRandom(),
     name: varchar("name", { length: 255 }).notNull(),
     email: varchar("email", { length: 255 }).notNull().unique(),
