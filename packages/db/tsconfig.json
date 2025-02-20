@@ -8,7 +8,9 @@
             "@*": ["./*"]
         },
         "rootDir": "./src",
-        "outDir": "./dist"
+        "outDir": "./dist",
+        "module": "NodeNext",
+        "moduleResolution": "nodenext"
     },
     "include": ["src/**/*.ts"],
     "exclude": ["node_modules", "dist", "src/**/**.js", ".generated"]
