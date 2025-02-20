@@ -1,8 +1,12 @@
 {
-  "name": "db",
+  "name": "@repo/db",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
+  "exports": {
+    "./client": "./src/database/index.ts",
+    "./user": "./src/schema.ts"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "db:generate": "pnpm drizzle-kit generate",
