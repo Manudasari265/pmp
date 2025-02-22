@@ -4,7 +4,7 @@
   "main": "index.js",
   "type": "module",
   "exports": {
-    "./client": "./dist/index.js",
+    "./client": "./src/index.ts",
     "./user": "./src/schema.ts"
   },
   "scripts": {
@@ -17,6 +17,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@repo/typescript-config": "workspace:*",
     "dotenv": "^16.4.7",
     "dotenv-expand": "^12.0.1",
     "drizzle-orm": "^0.39.3",

@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@repo/ui": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
     "better-auth": "^1.1.18",
     "next": "^15.1.6",
     "react": "^19.0.0",
@@ -19,7 +20,6 @@
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
     "@types/node": "^22",
     "@types/react": "19.0.8",
     "@types/react-dom": "19.0.3",

@@ -26,9 +26,6 @@ importers:
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
-      better-auth:
-        specifier: ^1.1.18
-        version: 1.1.18
       zod:
         specifier: ^3.24.2
         version: 3.24.2
@@ -51,6 +48,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../../packages/typescript-config
       '@repo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -70,9 +70,6 @@ importers:
       '@repo/eslint-config':
         specifier: workspace:*
         version: link:../../packages/eslint-config
-      '@repo/typescript-config':
-        specifier: workspace:*
-        version: link:../../packages/typescript-config
       '@types/node':
         specifier: ^22
         version: 22.13.0
@@ -91,6 +88,9 @@ importers:
 
   packages/db:
     dependencies:
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
       dotenv:
         specifier: ^16.4.7
         version: 16.4.7
