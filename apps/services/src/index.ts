@@ -1,34 +1,38 @@
-// import express from "express";
-// import cors from "cors";
-// import { db } from "@repo/db/client";
-// import { userTable } from "@repo/db/user"; 
+import express from "express";
+import cors from "cors";
+import { db } from "@repo/db/client";
+import { userTable } from "@repo/db/user";
 
-// const app = express();
-// const PORT = 3001;
+const app = express();
+const PORT = 3001;
 
-// app.use(cors());
-// app.use(express.json());
+app.use(cors());
+app.use(express.json());
 
-// app.post("/signup", async (req, res) => {
-//     const { email } = req.body;
-//     const { password } = req.body;
+app.get("/signup", async (req, res) => {
+  const name = req.body.name;
+  const email: string = req.body.email;
+  const password: string = req.body.password;
 
-//     // const newUser = await db.insert(user)
-//     //   .values({
-//     //     email,
-//     //     password
-//     //   })
-//     //TODO: implement input validation with zod schema for users
-//     //TODO: hash the password and create the first user (or)
-//     //TODO: integrate better-auth library for auth 
-    
-//     res.send("This is a POST signup endpoint")
-// });
+  //TODO: implement input validation with zod schema for users
+  const user = await db
+    .insert(userTable)
+    .values({
+      name,
+      email,
+      password,
+    })
+    .returning();
+  //TODO: hash the password and create the first user (or)
+  //TODO: integrate better-auth library for auth
 
-// app.post("/login", (req, res) => {
-//     res.send("This is a POST signup endpoint")
-// });
+  res.send("This is a POST signup endpoint");
+});
 
-// app.listen(PORT, () => {
-//     console.log(`Server is listening on port: ${PORT}`);
-// });
+app.post("/login", (req, res) => {
+  res.send("This is a POST signup endpoint");
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is listening on port: ${PORT}`);
+});

@@ -1,17 +1,3 @@
 {
-    "extends": "@repo/typescript-config/base.json",
-    "compilerOptions": {
-        "isolatedModules": false,
-        "types": ["node"],
-        "baseUrl": ".",
-        "paths": {
-            "@*": ["./*"]
-        },
-        "rootDir": "./src",
-        "outDir": "./dist",
-        "module": "NodeNext",
-        "moduleResolution": "nodenext"
-    },
-    "include": ["src/**/*.ts"],
-    "exclude": ["node_modules", "dist", "src/**/**.js", ".generated"]
+    "extends": "@repo/typescript-config/base.json"
 }
