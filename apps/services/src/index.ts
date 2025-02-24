@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
-import { db } from "@repo/db/client";
-import { userTable } from "@repo/db/user";
+import { db } from "@repo/db";
+import { userTable } from "@repo/db/schema";
 
 const app = express();
 const PORT = 3001;
@@ -9,14 +9,16 @@ const PORT = 3001;
 app.use(cors());
 app.use(express.json());
 
-app.get("/signup", async (req, res) => {
+//^ TODO: database connection is failing - fix this
+//^ TODO: port mapping config failing - fix this 
+
+app.post("/signup", async (req, res) => {
   const name = req.body.name;
   const email: string = req.body.email;
   const password: string = req.body.password;
 
   //TODO: implement input validation with zod schema for users
-  const user = await db
-    .insert(userTable)
+  const user = await db.insert(userTable)
     .values({
       name,
       email,

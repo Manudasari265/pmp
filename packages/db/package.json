@@ -4,11 +4,17 @@
   "main": "index.js",
   "type": "module",
   "exports": {
-    "./client": "./src/index.ts",
-    "./user": "./src/schema.ts"
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./src/index.ts"
+    },
+    "./schema": {
+      "import": "./dist/schema.js",
+      "types": "./src/schema.ts"
+    }
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc -b && cp src/*.ts dist/",
     "db:generate": "pnpm drizzle-kit generate",
     "db:migrate": "pnpm drizzle-kit migrate"
   },
