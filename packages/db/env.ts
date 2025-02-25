@@ -8,12 +8,6 @@ const stringBoolean = z.coerce.string().transform((val) => {
 }).default("false");
 
 const EnvSchema = z.object({
-    NODE_ENV: z.string().default("development"),
-    DB_USER: z.string(),
-    DB_NAME: z.string(),
-    DB_PORT: z.coerce.number(),
-    DB_HOST: z.string(),
-    DB_PASSWORD: z.string(),
     DATABASE_URL: z.string(),
 })
 
