@@ -1,0 +1,33 @@
+name: check-pull-requests
+
+on:
+  push:
+    branches:
+        - main
+
+concurrency:
+  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.event.pull_request.head.sha || github.sha }}
+
+jobs:
+    check:
+        name: Check Pull Requests
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code 🛎
+              uses: ubuntu-latest
+
+            - name: Setup pnpm 📦
+              uses: pnpm/action-setup@v3
+
+            - name: Setup Node.js 🟩
+              uses: actions/setup-node@v4
+              with:
+                cache: "pnpm"
+                node-version: "23"
+
+            - name: Install dependencies 📦
+              run: pnpm install
+
+            - name: Check 🚨
+              run: pnpm check
