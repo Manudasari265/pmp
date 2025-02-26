@@ -21,8 +21,8 @@
     "typescript": "^5.7.3"
   },
   "dependencies": {
-    "@repo/db": "workspace:*",
     "@repo/typescript-config": "workspace:*",
+    "@repo/db": "workspace:*",
     "dotenv": "^16.4.7",
     "ts-node": "^10.9.2",
     "zod": "^3.24.2"

@@ -4,39 +4,32 @@
   "main": "index.js",
   "type": "module",
   "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "types": "./src/index.ts"
-    },
-    "./schema": {
-      "import": "./dist/schema.js",
-      "types": "./src/db/schema.ts"
-    }
+    "./client": "./src/index.ts",
+    "./user": "./src/db/schema.ts"
   },
   "scripts": {
-    "build": "tsc -b && cp src/*.ts dist/",
-    "db:generate": "pnpm drizzle-kit generate",
-    "db:migrate": "pnpm drizzle-kit migrate",
-    "db:studio": "pnpm drizzle-kit studio"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "db:generate": "npx drizzle-kit generate",
+    "db:migrate": "npx drizzle-kit migrate",
+    "db:push": "npx drizzle-kit push",
+    "db:studio": "npx drizzle-kit studio --verbose"
+
+  },
+  "dependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@t3-oss/env-core": "^0.12.0",
+    "@types/dotenv": "6.1.1",
+    "dotenv": "^16.4.7",
+    "drizzle-orm": "^0.40.0",
+    "postgres": "^3.4.5",
+    "zod": "^3.24.2"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
-  "dependencies": {
-    "@neondatabase/serverless": "^0.10.4",
-    "@repo/typescript-config": "workspace:*",
-    "dotenv": "^16.4.7",
-    "dotenv-expand": "^12.0.1",
-    "drizzle-orm": "^0.39.3",
-    "zod": "^3.24.2"
-  },
   "devDependencies": {
-    "@types/dotenv": "6.1.1",
-    "@types/node": "^22.13.4",
-    "@types/pg": "^8.11.11",
-    "drizzle-kit": "^0.30.4",
-    "tsx": "^4.19.2",
-    "typescript": "^5.7.3"
+    "drizzle-kit": "^0.30.5",
+    "tsx": "^4.19.3"
   }
 }
