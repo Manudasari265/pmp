@@ -5,8 +5,15 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1739629146054,
-      "tag": "0000_right_tarot",
+      "when": 1740560685497,
+      "tag": "0000_mighty_amazoness",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1740570184049,
+      "tag": "0001_white_dreaming_celestial",
       "breakpoints": true
     }
   ]
