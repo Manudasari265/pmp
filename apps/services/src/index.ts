@@ -1,13 +1,21 @@
 import express from "express";
 import cors from "cors";
+import dotenv from "dotenv";
 import { db } from "@repo/db/client";
 import { user } from "@repo/db/user";
 
-const app = express();
-const PORT = 3001;
+dotenv.config();
 
-app.use(cors());
+const app = express();
+const PORT = process.env.PORT || 3001;
+
 app.use(express.json());
+app.use(cors({
+  origin: ["http://localhost:3000"],
+  credentials: true,
+  methods: ["POST", "PUT", "GET", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
 
 //^ TODO: database connection is failing - fix this
 //^ TODO: port mapping config failing - fix this 
