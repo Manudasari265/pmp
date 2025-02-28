@@ -15,6 +15,13 @@
       "when": 1740570184049,
       "tag": "0001_white_dreaming_celestial",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1740742872789,
+      "tag": "0002_curvy_blazing_skull",
+      "breakpoints": true
     }
   ]
 }
