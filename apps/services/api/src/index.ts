@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { db } from "@repo/db/client";
-import { user } from "@repo/db/user";
+import { users } from "@repo/db/user";
 
 dotenv.config();
 
@@ -26,7 +26,7 @@ app.post("/signup", async (req, res) => {
   const password: string = req.body.password;
 
   //TODO: implement input validation with zod schema for users
-  const users = await db.insert(user)
+  const usersData = await db.insert(users)
     .values({
       username,
       email,
@@ -43,7 +43,7 @@ app.post("/signup", async (req, res) => {
 
 app.get("/users", async (req, res) => {
   const result = await db.select()
-      .from(user);
+      .from(users);
 
   console.log("Getting all users from database: ", result);
 
