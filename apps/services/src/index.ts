@@ -17,29 +17,11 @@ app.use(cors({
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
-//^ TODO: database connection is failing - fix this
-//^ TODO: port mapping config failing - fix this 
-
-app.post("/signup", async (req, res) => {
-  const username = req.body.username;
-  const email: string = req.body.email;
-  const password: string = req.body.password;
-
-  //TODO: implement input validation with zod schema for users
-  const usersData = await db.insert(users)
-    .values({
-      username,
-      email,
-      password,
-    })
-    .returning();
-  //TODO: hash the password and create the first user (or)
-  //TODO: integrate better-auth library for auth
-
-  res.status(200).json({
-    message: "User Signup successful"
-  });
-});
+app.post("/projects", (req, res) => {
+  const { project_name } = req.body;
+  const { url } = req.body;
+  const { is_private } = req.body;
+})
 
 app.get("/users", async (req, res) => {
   const result = await db.select()
