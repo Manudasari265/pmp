@@ -34,7 +34,7 @@ app.post("/projects", async (req, res) => {
 
 app.get("/users", async (req, res) => {
   const result = await db.select()
-      .from(user);
+      .from(users);
 
   console.log("Getting all users from database: ", result);
 
