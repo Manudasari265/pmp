@@ -6,9 +6,10 @@ import {
     varchar,
     timestamp,
     boolean,
-    integer
+    integer,
+    pgEnum,
+    primaryKey
 } from "drizzle-orm/pg-core";
-
 
 export const users = pgTable('users', {
     id: uuid("id").primaryKey().defaultRandom(),
@@ -26,9 +27,11 @@ export const userRelations = relations(users, ({ many }) => ({
 export const projects = pgTable('projects', {
     id: uuid("id").primaryKey().defaultRandom(),
     project_name: varchar("project_name", { length: 255 }).notNull(),
-    url: varchar("url").notNull(),
-    private: boolean("private").notNull(),
-    authorId: integer("user_id")
+    url: varchar("url", { length: 255 }).unique().notNull(),
+    is_private: boolean("is_private").notNull().default(true),
+    authorId: uuid("user_id").notNull().references(() => users.id),
+    createdAt: timestamp("created_at", { mode: "string" }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { mode: "string" }).notNull().defaultNow(),
 });
 
 export const projectRelations = relations(projects, ({ one }) => ({

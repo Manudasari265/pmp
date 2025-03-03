@@ -3,8 +3,8 @@
     "type": "module",
     "compilerOptions": {
         "outDir": "./dist",
-        "rootDir": "./api"
+        "rootDir": "./src"
     },
-    "include": ["api/src/**/*"],
+    "include": ["src/**/*"],
     "exclude": ["node_modules", "dist"]
 }
