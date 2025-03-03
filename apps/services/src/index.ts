@@ -2,7 +2,8 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { db } from "@repo/db/client";
-import { user } from "@repo/db/user";
+import { users } from "@repo/db/user";
+import { projects } from "@repo/db/projects";
 
 dotenv.config();
 
@@ -17,29 +18,19 @@ app.use(cors({
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
-//^ TODO: database connection is failing - fix this
-//^ TODO: port mapping config failing - fix this 
+app.post("/projects", async (req, res) => {
+  const { project_name } = req.body;
+  const { url } = req.body;
+  const { is_private } = req.body;
 
-app.post("/signup", async (req, res) => {
-  const username = req.body.username;
-  const email: string = req.body.email;
-  const password: string = req.body.password;
-
-  //TODO: implement input validation with zod schema for users
-  const users = await db.insert(user)
+  //TODO: Add validation for project_name, url, and is_private
+  const projectCreation = await db.insert(projects)
     .values({
-      username,
-      email,
-      password,
-    })
-    .returning();
-  //TODO: hash the password and create the first user (or)
-  //TODO: integrate better-auth library for auth
-
-  res.status(200).json({
-    message: "User Signup successful"
-  });
-});
+      project_name: project_name,
+      url: url,
+      is_private: is_private
+  }).returning();
+})
 
 app.get("/users", async (req, res) => {
   const result = await db.select()

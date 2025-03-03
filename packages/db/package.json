@@ -5,7 +5,8 @@
   "type": "module",
   "exports": {
     "./client": "./src/index.ts",
-    "./user": "./src/db/schema.ts"
+    "./user": "./src/db/schema.ts",
+    "./projects": "./src/db/schema.ts"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
