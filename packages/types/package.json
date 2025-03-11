@@ -1,8 +1,12 @@
 {
-  "name": "types",
+  "name": "@repo/types",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
+  "exports": {
+    "./projectInputValidation": "./src/index.ts",
+    "./projectType": "./src/index.ts"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
