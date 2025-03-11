@@ -1,14 +1,18 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { db } from "@repo/db/client";
 import { users } from "@repo/db/user";
+import { ZodError } from "zod";
 import { projects } from "@repo/db/projects";
+import { ProjectValidationSchema } from "@repo/types/projectInputValidation";
+import { ProjectInferType } from "@repo/types/projectInputValidation";
+import authMiddleware from "@repo/auth/authMiddleware";
 
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 8080;
 
 app.use(express.json());
 app.use(cors({
@@ -18,19 +22,62 @@ app.use(cors({
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
-app.post("/projects", async (req, res) => {
-  const { project_name } = req.body;
-  const { url } = req.body;
-  const { is_private } = req.body;
+app.post("/projects", authMiddleware , async (req: Request<{}, {}, ProjectInferType>, res: Response) => {
+  try {
+    const parsedBody = ProjectValidationSchema.safeParse(req.body);
 
-  //TODO: Add validation for project_name, url, and is_private
-  const projectCreation = await db.insert(projects)
-    .values({
-      project_name: project_name,
-      url: url,
-      is_private: is_private
-  }).returning();
-})
+    if(!parsedBody.success) {
+      res.status(400).json({
+        message: "Input credentials incorrect!",
+        error: parsedBody.error.format()
+      });
+      return;
+    }
+
+    const userId = req.userId;
+    if(!userId) {
+      res.status(401).json({
+        message: "User unauthorized",
+        error: "Wrong user session"
+      })
+      return;
+    }
+
+    //TODO: Install Svix for integrating webhooks 
+    //TODO: Add a sep route for clerk webhook
+    //TODO: Test the 1st user's project creation
+    const newProjectForUser = await db.insert(projects)
+      .values({
+       ...parsedBody.data,
+       authorId: userId,
+    })
+    .returning();
+
+    if(!newProjectForUser) {
+      res.status(404).json({
+        message: "Internal server error",
+      })
+      return;
+    }
+
+    res.status(201).json({
+      message: "New project roadmap successfully created",
+      project: newProjectForUser
+    })
+  } catch (error) {
+    if(error instanceof ZodError) {
+      res.status(400).json({
+        error: error.format()
+      });
+    }
+    console.error("Error in /projects endpoint: ", error);
+    
+    res.status(500).json({
+      message: "PmP creation failed!",
+      error: error instanceof Error ? error.message : "Unknown error"
+    });
+  }
+});
 
 app.get("/users", async (req, res) => {
   const result = await db.select()
