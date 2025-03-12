@@ -22,7 +22,34 @@ app.use(cors({
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
-app.post("/projects", authMiddleware , async (req: Request<{}, {}, ProjectInferType>, res: Response) => {
+//^ For the time being this endpoint is temporary/optional
+//^ Clerk to db syncing needs to be done via webhooks
+app.post("/signup", async (req, res) => {
+  const { username } = req.body;
+  const { email } = req.body;
+  const { password } = req.body;
+
+  const userCreation = await db.insert(users)
+       .values({
+          username,
+          email,
+          password
+       })
+       .returning();
+
+  if(!userCreation) {
+    res.status(500).json({
+      message: "User creation failed!"
+    });
+    return;
+  }
+
+  res.status(200).json({
+    message: "User created successfully!!"
+  });
+})
+
+app.post("/projects", async (req: Request<{}, {}, ProjectInferType>, res: Response) => {
   try {
     const parsedBody = ProjectValidationSchema.safeParse(req.body);
 
