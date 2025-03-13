@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { db } from "@repo/db/client";
+import { eq } from "drizzle/orm";
 import { users } from "@repo/db/user";
 import { ZodError } from "zod";
 import { projects } from "@repo/db/projects";
@@ -106,17 +107,33 @@ app.post("/projects", async (req: Request<{}, {}, ProjectInferType>, res: Respon
   }
 });
 
-app.get("/users", async (req, res) => {
-  const result = await db.select()
-      .from(users);
+app.get("/projects/", authMiddleware, async (req, res) => {
+  const userId = req.userId;
 
-  console.log("Getting all users from database: ", result);
+  try {
+    if(!userId) {
+      res.status(401).json({
+        message: "Unauthorized"
+      });
+      return;
+    }
 
-  res.status(200).json({
-    message: "Users fetched successfully",
-    result
-  })
-})
+    const fetchUserProjectDetails = await db.select()
+       .from(projects)
+       .where(eq(
+          projects.authorId,
+          userId
+       ));
+    res.status(200).json(fetchUserProjectDetails);
+  } catch (error) {
+    console.log("Error while fetching the project data");
+    
+    res.status(500).json({
+      message: "Fetching of users projects failed!",
+      error: error instanceof Error ? error.message : "Internal server error"
+    });
+  }
+});
 
 app.post("/login", (req, res) => {
   res.send("This is a POST signup endpoint");
