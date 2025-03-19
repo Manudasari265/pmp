@@ -1,4 +1,4 @@
-## Modern Project Management Application
+## Introducing PmP - Modern Project Management Application
 
 # Overview
 
