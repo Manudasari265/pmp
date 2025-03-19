@@ -1,14 +1,58 @@
-# Turborepo starter
+## Modern Project Management Application
 
-This Turborepo starter is maintained by the Turborepo core team.
+# Overview
 
-## Using this example
+This is an open-source, modern project management application built using the latest web technologies. Inspired by Jira and Linear, it provides an intuitive, high-performance workspace for teams to track issues, manage tasks, and collaborate effectively. The application is designed for efficiency, automation, and seamless user experience.
 
-Run the following command:
+# Tech Stack
 
-```sh
-npx create-turbo@latest
+* Frontend: Next.js, React 19, ShadCN (for modern UI components)
+* Backend: Express.js, TRPC (for type-safe API communication)
+* Database: PostgreSQL with Drizzle ORM
+* Caching & Queues: Redis for real-time performance
+* Monorepo Management: Turborepo with pnpm
+
+# Features
+
+* 🔄 Automatic Issue Tracker: AI-powered detection of bugs and issues in ongoing tasks.
+* 📝 Kanban Board: Drag-and-drop interface for managing tasks and workflows.
+* 💡 Brainstorming Notes & Ideation Area: A space for teams to collaborate, document ideas, and refine concepts.
+* ⚡ Real-time Collaboration: Instant updates across users using WebSockets.
+* 📊 Advanced Analytics & Reporting: Gain insights into productivity, task progress, and team efficiency.
+* 🔗 Deep Integrations: Connect with GitHub, Slack, and other productivity tools.
+* 🔄 Recurring Tasks & Automations: Set up workflow automations and task reminders.
+* ✅ Task Dependencies & Prioritization: Easily set blockers and priorities to optimize workflows.
+* 🔒 Role-Based Access Control (RBAC): Granular permission settings for team members.
+* 🌍 Multi-Tenant Support: Manage multiple organizations or teams within a single workspace.
+
+# Installation & Deployment
+
+Prerequisites
+
+* Node.js & pnpm
+* PostgreSQL & Redis
+* Turborepo setup
+
+# Clone & Setup
 ```
+git clone https://github.com/Manudasari265/pmp
+cd pmp
+pnpm install
+```
+# Run Locally
+
+``` pnpm dev ```
+# Deploy to Production
+```docker-compose up --build -d```
+
+Roadmap & Future Enhancements
+
+AI-powered task estimation & risk assessment
+Mobile App using React Native
+Dark Mode & Custom Themes
+Gantt Charts for timeline visualization
+**Public API for third-party integrations
+
 
 ## What's inside?
 
